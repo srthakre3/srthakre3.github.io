@@ -744,23 +744,35 @@ document.querySelectorAll('.project-card').forEach(c=>{
 
     const nx=n=>n.fx*w, ny=n=>n.fy*h;
 
-    // Stage labels
-    const labelFs = Math.max(w*.034, 7);
-    ctx.font=`700 ${labelFs}px Inter,sans-serif`;
+    // Rounded rect helper
+    function rr(x,y,w2,h2,rad){
+      const r2=Math.min(rad,w2/2,h2/2);
+      ctx.beginPath();
+      ctx.moveTo(x+r2,y);
+      ctx.lineTo(x+w2-r2,y); ctx.quadraticCurveTo(x+w2,y,x+w2,y+r2);
+      ctx.lineTo(x+w2,y+h2-r2); ctx.quadraticCurveTo(x+w2,y+h2,x+w2-r2,y+h2);
+      ctx.lineTo(x+r2,y+h2); ctx.quadraticCurveTo(x,y+h2,x,y+h2-r2);
+      ctx.lineTo(x,y+r2); ctx.quadraticCurveTo(x,y,x+r2,y);
+      ctx.closePath();
+    }
+
+    // Stage labels — monospace
+    const labelFs = Math.max(w*.028, 6.5);
+    ctx.font=`700 ${labelFs}px 'Courier New',monospace`;
     ctx.textAlign='center'; ctx.textBaseline='top';
     stages.forEach(s=>{
-      ctx.fillStyle='rgba(37,99,235,.32)';
-      ctx.fillText(s.label, s.fx*w, h*.045);
+      ctx.fillStyle='rgba(37,99,235,.35)';
+      ctx.fillText(s.label, s.fx*w, h*.04);
     });
 
-    // Stage divider lines
-    ctx.setLineDash([2,6]);
-    ctx.strokeStyle='rgba(37,99,235,.1)';
-    ctx.lineWidth=.8;
+    // Stage dividers — dotted
     [.22,.44,.66,.855].forEach(fx=>{
-      ctx.beginPath(); ctx.moveTo(fx*w, h*.13); ctx.lineTo(fx*w, h*.92); ctx.stroke();
+      const x0=fx*w, y0=h*.13, y1=h*.92, gap=8;
+      for(let y=y0;y<y1;y+=gap){
+        ctx.beginPath(); ctx.arc(x0,y,1,0,Math.PI*2);
+        ctx.fillStyle='rgba(37,99,235,.18)'; ctx.fill();
+      }
     });
-    ctx.setLineDash([]);
 
     // Edges — curved bezier
     edges.forEach(([fi,ti])=>{
@@ -795,45 +807,51 @@ document.querySelectorAll('.project-card').forEach(c=>{
       ctx.fillStyle='rgba(255,255,255,.95)'; ctx.fill();
     });
 
-    // Nodes
+    // Nodes — rounded rectangles
     nodes.forEach((n,i)=>{
       const x=nx(n), y=ny(n);
-      const pulse=1+.045*Math.sin(frame*.038+i*1.2);
-      const r=n.r*pulse;
+      const pulse=1+.03*Math.sin(frame*.038+i*1.2);
+      const rw=n.r*2.8*pulse, rh=n.r*1.55*pulse;
+      const rx=x-rw/2, ry=y-rh/2;
       const col=n.col;
 
-      // Outer glow
-      const og=ctx.createRadialGradient(x,y,r*.2,x,y,r*2.6);
-      og.addColorStop(0,col+'28'); og.addColorStop(1,col+'00');
-      ctx.beginPath(); ctx.arc(x,y,r*2.6,0,Math.PI*2);
+      // Glow rect
+      const gp=8;
+      rr(rx-gp,ry-gp,rw+gp*2,rh+gp*2,7);
+      const og=ctx.createLinearGradient(rx,ry,rx+rw,ry+rh);
+      og.addColorStop(0,col+'18'); og.addColorStop(1,col+'08');
       ctx.fillStyle=og; ctx.fill();
 
-      // Node circle
-      ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
-      ctx.fillStyle='rgba(6,6,14,.96)';
-      ctx.strokeStyle=col+'cc';
-      ctx.lineWidth=1.3;
+      // Main rect
+      rr(rx,ry,rw,rh,5);
+      ctx.fillStyle='rgba(6,6,14,.97)';
+      ctx.strokeStyle=col+'bb';
+      ctx.lineWidth=1.2;
       ctx.fill(); ctx.stroke();
 
-      // Status dot
-      ctx.beginPath(); ctx.arc(x+r*.62,y-r*.62,r*.22,0,Math.PI*2);
+      // Top-left color accent bar
+      rr(rx,ry,rw*.32,3,2);
+      ctx.fillStyle=col+'99'; ctx.fill();
+
+      // Status dot top-right
+      ctx.beginPath(); ctx.arc(rx+rw-5,ry+5,2.5,0,Math.PI*2);
       ctx.fillStyle='#4ADE80'; ctx.fill();
 
-      // Label
-      const fs=Math.min(r*.43,8.8);
-      ctx.font=`600 ${fs}px Inter,sans-serif`;
+      // Label — monospace
+      const fs=Math.min(rh*.36,8.5);
+      ctx.font=`600 ${fs}px 'Courier New',monospace`;
       ctx.textAlign='center'; ctx.textBaseline='middle';
       ctx.fillStyle='rgba(240,240,245,.92)';
       ctx.fillText(n.label,x,y);
     });
 
-    // Live row counter
+    // Live row counter — monospace
     rowCount += Math.floor(Math.random()*4+1);
-    const cfs=Math.max(w*.032,6.5);
+    const cfs=Math.max(w*.030,6);
     ctx.font=`500 ${cfs}px 'Courier New',monospace`;
     ctx.textAlign='left'; ctx.textBaseline='bottom';
-    ctx.fillStyle='rgba(37,99,235,.48)';
-    ctx.fillText('↻  '+rowCount.toLocaleString()+' rows/processed', w*.04, h*.97);
+    ctx.fillStyle='rgba(37,99,235,.45)';
+    ctx.fillText('↻  '+rowCount.toLocaleString()+' rows processed', w*.04, h*.97);
 
     frame++;
     requestAnimationFrame(draw);
