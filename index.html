@@ -120,20 +120,19 @@
     .about-grid { display:grid; grid-template-columns:auto 1fr; gap:3rem; align-items:start; margin-top:.5rem; }
 
     /* Photo — subtle */
-    .photo-wrap { display:flex; flex-direction:column; align-items:flex-start; gap:.6rem; }
-    .photo-ring { width:160px; height:160px; border-radius:14px; padding:2px; background:linear-gradient(135deg,rgba(37,99,235,.5),rgba(96,165,250,.4)); flex-shrink:0; }
+    .photo-wrap { display:flex; flex-direction:column; align-items:flex-start; gap:.7rem; }
+    .photo-ring { width:200px; height:200px; border-radius:14px; padding:2px; background:linear-gradient(135deg,rgba(37,99,235,.5),rgba(96,165,250,.4)); flex-shrink:0; }
     .photo-inner { width:100%; height:100%; border-radius:12px; overflow:hidden; background:var(--card2); display:flex; align-items:center; justify-content:center; }
     .photo-inner img { width:100%; height:100%; object-fit:cover; object-position:center top; }
     .photo-initials { font-size:1.4rem; font-weight:800; color:var(--teal); letter-spacing:-.04em; }
-    .photo-meta { display:flex; align-items:center; gap:.45rem; flex-wrap:wrap; }
-    .photo-name { font-size:.82rem; font-weight:600; color:var(--text); }
-    .photo-sep { font-size:.7rem; color:var(--border2); }
-    .photo-title { font-size:.75rem; color:var(--sub); }
+    .photo-meta { display:flex; flex-direction:column; align-items:flex-start; gap:.18rem; }
+    .photo-name { font-size:.88rem; font-weight:600; color:var(--text); white-space:nowrap; }
+    .photo-title { font-size:.75rem; color:var(--sub); white-space:nowrap; }
 
-    .about-right { display:grid; grid-template-columns:1.2fr 1fr; gap:2rem; }
+    .about-right { display:flex; flex-direction:column; gap:1.6rem; }
     .about-text p { font-size:.95rem; color:var(--sub); margin-bottom:1rem; line-height:1.75; }
     .about-text p strong { color:var(--text); font-weight:600; }
-    .about-cards { display:flex; flex-direction:column; gap:.65rem; }
+    .about-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:.65rem; }
     .about-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1rem; display:flex; align-items:center; gap:.85rem; transition:border-color .25s,background .25s; }
     .about-card:hover { border-color:var(--border2); background:var(--card2); }
     .about-icon { width:36px; height:36px; border-radius:9px; background:var(--teal-d); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
@@ -321,7 +320,6 @@
         </div>
         <div class="photo-meta">
           <span class="photo-name">Sanket Thakre</span>
-          <span class="photo-sep">·</span>
           <span class="photo-title">Analytics Engineer · Seattle, WA</span>
         </div>
       </div>
