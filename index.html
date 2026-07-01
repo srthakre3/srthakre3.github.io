@@ -110,12 +110,12 @@
 
     /* ── ABOUT ──────────────────────────────────── */
     #about { background:var(--bg); }
-    .about-grid { display:grid; grid-template-columns:auto 1fr; gap:3rem; align-items:start; }
+    .about-grid { display:grid; grid-template-columns:auto 1fr; gap:3rem; align-items:start; margin-top:.5rem; }
 
     /* Photo — subtle */
-    .photo-wrap { display:flex; flex-direction:column; align-items:center; gap:.6rem; }
-    .photo-ring { width:88px; height:88px; border-radius:50%; padding:2px; background:linear-gradient(135deg,rgba(37,99,235,.5),rgba(96,165,250,.4)); flex-shrink:0; }
-    .photo-inner { width:100%; height:100%; border-radius:50%; overflow:hidden; background:var(--card2); display:flex; align-items:center; justify-content:center; }
+    .photo-wrap { display:flex; flex-direction:column; align-items:flex-start; gap:.6rem; }
+    .photo-ring { width:160px; height:160px; border-radius:14px; padding:2px; background:linear-gradient(135deg,rgba(37,99,235,.5),rgba(96,165,250,.4)); flex-shrink:0; }
+    .photo-inner { width:100%; height:100%; border-radius:12px; overflow:hidden; background:var(--card2); display:flex; align-items:center; justify-content:center; }
     .photo-inner img { width:100%; height:100%; object-fit:cover; object-position:center top; }
     .photo-initials { font-size:1.4rem; font-weight:800; color:var(--teal); letter-spacing:-.04em; }
     .photo-name { font-size:.82rem; font-weight:600; color:var(--text); text-align:center; }
@@ -391,10 +391,10 @@
 
       <div class="tl-item reveal d2">
         <div class="tl-dot active"></div>
-        <div class="tl-year">2025 – Present</div>
-        <div class="tl-title">Analytics Engineering</div>
-        <div class="tl-sub">Expanding into the modern data stack — dbt, Apache Airflow, data quality frameworks, and open-source tooling. Building toward Analytics Engineer / Senior AE roles.</div>
-        <span class="tl-tag">dbt · Airflow · Analytics Engineering</span>
+        <div class="tl-year">Jun 2025 – Present</div>
+        <div class="tl-title">Moved to Amazon Pharmacy team · Seattle, WA</div>
+        <div class="tl-sub">Transitioned to Amazon Pharmacy — building kiosk launch analytics and maintaining contractual SLA pipelines for pharmacy partners across North America.</div>
+        <span class="tl-tag">Amazon Pharmacy · BIE</span>
       </div>
 
     </div>
@@ -426,14 +426,24 @@
         <div class="exp-company">Amazon</div>
         <div class="exp-dates">Aug 2021 – Present · Seattle, WA</div>
       </div>
-      <div class="exp-role">Business Intelligence Engineer</div>
-      <ul class="exp-bullets">
-        <li>Sole product owner of a real-time fulfillment risk and alerting platform — integrated 35 sites, rebuilt unstable ETL pipelines, and achieved an 84% reduction in data quality incidents; foundational pipelines later adopted org-wide by a separate fulfillment planning service.</li>
-        <li>Led modernization of a global rate-setting system supporting annual operational planning across NA, EU, Japan, and India; analyzed 9 interconnected stored procedures and migrated to centralized ETL pipelines with version control and automated triggers.</li>
-        <li>Architected a centralized KPI platform standardizing 95 metrics across fulfillment operations — powering 4 data products across 3 business units, reducing new analytics solution delivery from 6 months to 2 weeks, and cutting data accuracy incidents by 25%.</li>
-        <li>Built North America Amazon Pharmacy kiosk launch analytics — replenishment and user analytics pipelines tracking daily orders — and migrated/maintained contractual SLA data pipelines for pharmacy partners, preventing financial penalties by proactively detecting anomalies outside contract scope.</li>
-        <li>Inherited a business-critical operations metrics pipeline (Go codebase) after the maintaining engineer departed; resolved critical accuracy issues in 2 days and delivered BI solutions — dimensional models, ETL pipelines, QuickSight dashboards — across fulfillment and pharmacy operations teams.</li>
-      </ul>
+
+      <div style="margin-bottom:1.4rem">
+        <div class="exp-role" style="margin-bottom:.65rem">Business Intelligence Engineer · Pharmacy <span style="font-size:.72rem;color:var(--teal);background:var(--teal-d);border:1px solid rgba(37,99,235,.25);padding:.15rem .5rem;border-radius:5px;margin-left:.5rem;font-style:normal">Jun 2025 – Present</span></div>
+        <ul class="exp-bullets">
+          <li>Built North America Amazon Pharmacy kiosk launch analytics — replenishment and user analytics pipelines tracking daily orders — providing visibility into kiosk performance across launch markets.</li>
+          <li>Migrated and maintained contractual SLA data pipelines for pharmacy partners, preventing financial penalties by proactively detecting anomalies outside contract scope.</li>
+        </ul>
+      </div>
+
+      <div style="border-top:1px solid var(--border);padding-top:1.4rem">
+        <div class="exp-role" style="margin-bottom:.65rem">Business Intelligence Engineer · Global Fulfillment <span style="font-size:.72rem;color:var(--sub);background:rgba(255,255,255,.05);border:1px solid var(--border);padding:.15rem .5rem;border-radius:5px;margin-left:.5rem;font-style:normal">Aug 2021 – May 2025</span></div>
+        <ul class="exp-bullets">
+          <li>Sole product owner of a real-time fulfillment risk and alerting platform — integrated 35 sites, rebuilt unstable ETL pipelines, and achieved an 84% reduction in data quality incidents; foundational pipelines later adopted org-wide by a separate fulfillment planning service.</li>
+          <li>Led modernization of a global rate-setting system supporting annual operational planning across NA, EU, Japan, and India; analyzed 9 interconnected stored procedures and migrated to centralized ETL pipelines with version control and automated triggers.</li>
+          <li>Architected a centralized KPI platform standardizing 95 metrics across fulfillment operations — powering 4 data products across 3 business units, reducing new analytics solution delivery from 6 months to 2 weeks, and cutting data accuracy incidents by 25%.</li>
+          <li>Inherited a business-critical operations metrics pipeline (Go codebase) after the maintaining engineer departed; resolved critical accuracy issues in 2 days and delivered BI solutions — dimensional models, ETL pipelines, QuickSight dashboards — across fulfillment operations teams.</li>
+        </ul>
+      </div>
     </div>
 
     <div class="exp-card reveal d1">
