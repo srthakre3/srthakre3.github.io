@@ -184,6 +184,31 @@
     .foot-links a { font-size:.76rem; color:var(--sub); text-decoration:none; transition:color .2s; }
     .foot-links a:hover { color:var(--teal); }
 
+    /* ── TIMELINE ────────────────────────────────── */
+    #journey { background:var(--surface); }
+    .timeline { position:relative; padding-left:1.5rem; max-width:680px; }
+    .timeline::before { content:''; position:absolute; left:0; top:6px; bottom:0; width:2px; background:linear-gradient(to bottom,var(--teal),rgba(37,99,235,.08)); }
+    .tl-item { position:relative; padding:0 0 2.8rem 2rem; }
+    .tl-item:last-child { padding-bottom:0; }
+    .tl-dot { position:absolute; left:-1.5rem; top:4px; width:12px; height:12px; border-radius:50%; background:var(--surface); border:2px solid rgba(37,99,235,.4); transform:translateX(-5px); }
+    .tl-dot.active { background:var(--teal); border-color:var(--teal); box-shadow:0 0 0 4px rgba(37,99,235,.18); }
+    .tl-year { font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:.3rem; }
+    .tl-title { font-size:.97rem; font-weight:700; color:var(--text); margin-bottom:.3rem; }
+    .tl-sub { font-size:.86rem; color:var(--sub); line-height:1.7; }
+    .tl-tag { display:inline-flex; margin-top:.55rem; font-size:.7rem; font-weight:600; color:var(--teal); background:var(--teal-d); border:1px solid rgba(37,99,235,.25); padding:.2rem .6rem; border-radius:5px; }
+
+    /* ── EDUCATION ──────────────────────────────── */
+    #education { background:var(--surface); }
+    .edu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.25rem; }
+    .edu-card { background:var(--card); border:1px solid var(--border); border-radius:20px; padding:1.8rem; position:relative; overflow:hidden; transition:border-color .3s,transform .3s; }
+    .edu-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--teal),var(--blue)); }
+    .edu-card:hover { border-color:rgba(37,99,235,.35); transform:translateY(-4px); }
+    .edu-school { font-size:1.1rem; font-weight:800; letter-spacing:-.02em; background:linear-gradient(135deg,var(--teal),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:.3rem; }
+    .edu-degree { font-size:.92rem; color:var(--text); font-weight:600; margin-bottom:.25rem; }
+    .edu-meta { font-size:.82rem; color:var(--sub); margin-bottom:1rem; }
+    .edu-pills { display:flex; flex-wrap:wrap; gap:.35rem; }
+    .edu-pill { font-size:.72rem; color:rgba(240,240,245,.7); background:rgba(255,255,255,.05); border:1px solid var(--border); padding:.2rem .55rem; border-radius:6px; }
+
     /* ── RESPONSIVE ─────────────────────────────── */
     @media(max-width:900px) {
       .hero-inner { grid-template-columns:1fr; }
@@ -206,8 +231,10 @@
   <a href="#" class="nav-logo">ST</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#journey">Journey</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -294,6 +321,86 @@
   </div>
 </section>
 
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="container">
+    <div class="eyebrow reveal">Journey</div>
+    <h2 class="sec-title reveal">The Road So Far</h2>
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2013 – 2018</div>
+        <div class="tl-title">BE, Electronics &amp; Telecommunications — University of Pune, India</div>
+        <div class="tl-sub">5-year engineering program covering digital systems, signal processing, and software development fundamentals.</div>
+      </div>
+
+      <div class="tl-item reveal d1">
+        <div class="tl-dot"></div>
+        <div class="tl-year">Aug 2019</div>
+        <div class="tl-title">Moved to the United States</div>
+        <div class="tl-sub">Relocated to Fullerton, California to pursue graduate studies at Cal State Fullerton.</div>
+      </div>
+
+      <div class="tl-item reveal d2">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2019 – 2021</div>
+        <div class="tl-title">MS, Computer Engineering — Cal State Fullerton</div>
+        <div class="tl-sub">Graduate Assistant at the Office of Research &amp; Sponsored Projects — collaborated with the AVP to produce the annual report for a campus of 45,000+ students and managed research communications.</div>
+        <span class="tl-tag">Graduate Assistant · CSUF</span>
+      </div>
+
+      <div class="tl-item reveal d1">
+        <div class="tl-dot active"></div>
+        <div class="tl-year">Aug 2021</div>
+        <div class="tl-title">Joined Amazon · Moved to Seattle, WA</div>
+        <div class="tl-sub">Started as a Business Intelligence Engineer on Amazon's global fulfillment analytics team. Picked up SQL at scale, Amazon Redshift, QuickSight, and AWS Glue from day one.</div>
+        <span class="tl-tag">BIE @ Amazon · Seattle</span>
+      </div>
+
+      <div class="tl-item reveal d2">
+        <div class="tl-dot active"></div>
+        <div class="tl-year">2021 – 2022</div>
+        <div class="tl-title">Fulfillment Ops &amp; Pharmacy Analytics</div>
+        <div class="tl-sub">Delivered BI solutions across fulfillment teams. Inherited and stabilized a business-critical pipeline in 2 days. Built NA Amazon Pharmacy kiosk launch analytics and maintained SLA pipelines for pharmacy partners.</div>
+      </div>
+
+      <div class="tl-item reveal d1">
+        <div class="tl-dot active"></div>
+        <div class="tl-year">2022 – 2023</div>
+        <div class="tl-title">Real-Time Risk &amp; Alerting Platform</div>
+        <div class="tl-sub">Sole product owner — integrated 35 fulfillment sites, rebuilt unstable ETL pipelines, and reduced data quality incidents by 84%. Core pipelines later adopted org-wide.</div>
+        <span class="tl-tag">84% fewer incidents · 35 sites</span>
+      </div>
+
+      <div class="tl-item reveal d2">
+        <div class="tl-dot active"></div>
+        <div class="tl-year">2023</div>
+        <div class="tl-title">Global Rate-Setting System</div>
+        <div class="tl-sub">Modernized the annual operational planning system used across NA, EU, Japan, and India — migrated 9 interconnected stored procedures to centralized ETL pipelines with version control.</div>
+        <span class="tl-tag">4 global regions</span>
+      </div>
+
+      <div class="tl-item reveal d1">
+        <div class="tl-dot active"></div>
+        <div class="tl-year">2023 – 2024</div>
+        <div class="tl-title">Centralized KPI Platform</div>
+        <div class="tl-sub">Architected a KPI platform standardizing 95 metrics — cut new solution delivery from 6 months to 2 weeks and reduced data accuracy incidents by 25% across 3 business units.</div>
+        <span class="tl-tag">95 KPIs · 6 months → 2 weeks</span>
+      </div>
+
+      <div class="tl-item reveal d2">
+        <div class="tl-dot active"></div>
+        <div class="tl-year">2025 – Present</div>
+        <div class="tl-title">Analytics Engineering</div>
+        <div class="tl-sub">Expanding into the modern data stack — dbt, Apache Airflow, data quality frameworks, and open-source tooling. Building toward Analytics Engineer / Senior AE roles.</div>
+        <span class="tl-tag">dbt · Airflow · Analytics Engineering</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- SKILLS -->
 <section id="skills">
   <div class="container">
@@ -314,20 +421,67 @@
   <div class="container">
     <div class="eyebrow reveal">Experience</div>
     <h2 class="sec-title reveal">Where I've Worked</h2>
-    <div class="exp-card reveal">
+    <div class="exp-card reveal" style="margin-bottom:1.5rem">
       <div class="exp-top">
         <div class="exp-company">Amazon</div>
         <div class="exp-dates">Aug 2021 – Present · Seattle, WA</div>
       </div>
       <div class="exp-role">Business Intelligence Engineer</div>
       <ul class="exp-bullets">
-        <li>Designed and implemented scalable ETL/ELT data pipelines using SQL and Python to ingest, transform, and load large datasets into Amazon Redshift, serving as the data backbone for multiple product and operations teams.</li>
-        <li>Developed and maintained dimensional data models — star/snowflake schemas and SCD types — to standardize KPI definitions across cross-functional teams and enable reliable self-serve analytics.</li>
-        <li>Automated end-to-end data collection, transformation, and delivery workflows, enabling real-time insight delivery through dashboards, deep-dive tools, and alerting systems.</li>
-        <li>Built and maintained production dashboards and metrics tooling in Amazon QuickSight, providing real-time operational visibility to business, finance, and operations stakeholders.</li>
-        <li>Partnered with data scientists, software development engineers, product managers, and business analysts to gather requirements, define data contracts, and ship end-to-end analytics solutions.</li>
-        <li>Performed complex deep-dive analysis on key business metrics to identify root causes, surface actionable insights, and drive high-impact strategic decisions.</li>
+        <li>Sole product owner of a real-time fulfillment risk and alerting platform — integrated 35 sites, rebuilt unstable ETL pipelines, and achieved an 84% reduction in data quality incidents; foundational pipelines later adopted org-wide by a separate fulfillment planning service.</li>
+        <li>Led modernization of a global rate-setting system supporting annual operational planning across NA, EU, Japan, and India; analyzed 9 interconnected stored procedures and migrated to centralized ETL pipelines with version control and automated triggers.</li>
+        <li>Architected a centralized KPI platform standardizing 95 metrics across fulfillment operations — powering 4 data products across 3 business units, reducing new analytics solution delivery from 6 months to 2 weeks, and cutting data accuracy incidents by 25%.</li>
+        <li>Built North America Amazon Pharmacy kiosk launch analytics — replenishment and user analytics pipelines tracking daily orders — and migrated/maintained contractual SLA data pipelines for pharmacy partners, preventing financial penalties by proactively detecting anomalies outside contract scope.</li>
+        <li>Inherited a business-critical operations metrics pipeline (Go codebase) after the maintaining engineer departed; resolved critical accuracy issues in 2 days and delivered BI solutions — dimensional models, ETL pipelines, QuickSight dashboards — across fulfillment and pharmacy operations teams.</li>
       </ul>
+    </div>
+
+    <div class="exp-card reveal d1">
+      <div class="exp-top">
+        <div class="exp-company">Cal State Fullerton</div>
+        <div class="exp-dates">Sep 2019 – May 2021 · Fullerton, CA</div>
+      </div>
+      <div class="exp-role">Graduate Assistant · Office of Research &amp; Sponsored Projects</div>
+      <ul class="exp-bullets">
+        <li>Collaborated with the Associate Vice President to design and produce the department's annual report, making it accessible to a campus community of 45,000+ students and faculty.</li>
+        <li>Maintained department website, managed communications and scheduling, and supported coordination of research workshops and events to promote campus-wide research initiatives.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="eyebrow reveal">Education</div>
+    <h2 class="sec-title reveal">Academic Background</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card reveal">
+        <div class="edu-school">Cal State Fullerton</div>
+        <div class="edu-degree">MS · Computer Engineering</div>
+        <div class="edu-meta">2019 – 2021 · Fullerton, California</div>
+        <div class="edu-pills">
+          <span class="edu-pill">Database Systems</span>
+          <span class="edu-pill">Algorithms</span>
+          <span class="edu-pill">Software Engineering</span>
+          <span class="edu-pill">Graduate Assistant</span>
+        </div>
+      </div>
+
+      <div class="edu-card reveal d1">
+        <div class="edu-school">University of Pune</div>
+        <div class="edu-degree">BE · Electronics &amp; Telecommunications</div>
+        <div class="edu-meta">2013 – 2018 · Pune, India</div>
+        <div class="edu-pills">
+          <span class="edu-pill">Digital Systems</span>
+          <span class="edu-pill">Signal Processing</span>
+          <span class="edu-pill">Software Development</span>
+          <span class="edu-pill">5-Year Program</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
