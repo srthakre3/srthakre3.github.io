@@ -177,6 +177,9 @@
     .project-desc { font-size:.85rem; color:var(--sub); line-height:1.65; flex:1; }
     .project-link { display:inline-flex; align-items:center; gap:.3rem; font-size:.8rem; font-weight:600; color:var(--teal); text-decoration:none; transition:gap .2s; }
     .project-link:hover { gap:.5rem; }
+    .arch-link { background:none; border:none; padding:0; cursor:pointer; font-family:inherit; display:inline-flex; align-items:center; gap:.3rem; font-size:.8rem; font-weight:600; color:rgba(139,92,246,.85); text-decoration:none; transition:gap .2s,color .2s; }
+    .arch-link:hover { gap:.5rem; color:#A78BFA; }
+    .project-actions { display:flex; align-items:center; gap:1.4rem; margin-top:auto; }
 
     /* ── CONTACT ────────────────────────────────── */
     #contact { background:var(--bg); }
@@ -525,7 +528,10 @@
         <div class="project-name">End-to-End ELT Pipeline with dbt & Airflow</div>
         <div class="project-stack"><span class="proj-tag">Python</span><span class="proj-tag">dbt</span><span class="proj-tag">Airflow</span><span class="proj-tag">PostgreSQL</span><span class="proj-tag">GitHub Actions</span></div>
         <div class="project-desc">9.5M rows of NYC TLC trip data ingested into PostgreSQL, transformed with dbt (staging → intermediate → dimensional mart), orchestrated with Apache Airflow, validated with 22 passing dbt tests, and monitored with Slack alerts. Fully containerized with Docker.</div>
-        <a href="https://github.com/srthakre3/nyc-taxi-elt-pipeline" target="_blank" class="project-link">View on GitHub →</a>
+        <div class="project-actions">
+          <a href="https://github.com/srthakre3/nyc-taxi-elt-pipeline" target="_blank" class="project-link">View on GitHub →</a>
+          <button class="arch-link" onclick="openArch('diagrams/architecture_elt_pipeline.svg','ELT Pipeline Architecture')">Architecture →</button>
+        </div>
       </div>
 
       <div class="project-card reveal d1">
@@ -549,7 +555,10 @@
         <div class="project-name">Automated Data Quality & Monitoring Framework</div>
         <div class="project-stack"><span class="proj-tag">Python</span><span class="proj-tag">pytest</span><span class="proj-tag">Pandas</span><span class="proj-tag">SQL</span></div>
         <div class="project-desc">Custom Python framework for automated data quality monitoring: schema validation, null/duplicate detection, referential integrity checks, and statistical outlier alerting. Generates HTML and JSON reports. 6/6 pytest tests passing, CI via GitHub Actions.</div>
-        <a href="https://github.com/srthakre3/data-quality-framework" target="_blank" class="project-link">View on GitHub →</a>
+        <div class="project-actions">
+          <a href="https://github.com/srthakre3/data-quality-framework" target="_blank" class="project-link">View on GitHub →</a>
+          <button class="arch-link" onclick="openArch('diagrams/architecture_data_quality.svg','Data Quality Framework Architecture')">Architecture →</button>
+        </div>
       </div>
 
       <div class="project-card reveal d2">
@@ -568,7 +577,10 @@
         <div class="project-name">Self-Serve Analytics Platform for E-commerce</div>
         <div class="project-stack"><span class="proj-tag">SQL</span><span class="proj-tag">dbt</span><span class="proj-tag">Redshift</span><span class="proj-tag">QuickSight</span></div>
         <div class="project-desc">Raw e-commerce data → dbt dimensional model → governed metric layer → interactive dashboard (revenue, churn, cohort retention) with documented data lineage.</div>
-        <a href="https://github.com/srthakre3/ecommerce-analytics-platform" target="_blank" class="project-link">View on GitHub →</a>
+        <div class="project-actions">
+          <a href="https://github.com/srthakre3/ecommerce-analytics-platform" target="_blank" class="project-link">View on GitHub →</a>
+          <button class="arch-link" onclick="openArch('diagrams/architecture_analytics_platform.svg','Self-Serve Analytics Platform Architecture')">Architecture →</button>
+        </div>
       </div>
 
     </div>
@@ -603,6 +615,19 @@
       </div>
     </div>
     <iframe class="modal-iframe" id="resumeFrame" src="" title="Resume Preview"></iframe>
+  </div>
+</div>
+
+<!-- ARCHITECTURE DIAGRAM MODAL -->
+<div class="modal-overlay" id="archModal">
+  <div class="modal-box" style="max-width:980px;height:auto;max-height:90vh">
+    <div class="modal-header">
+      <span class="modal-title" id="archModalTitle">Architecture Diagram</span>
+      <button class="modal-close" onclick="closeArch()">✕</button>
+    </div>
+    <div style="padding:1.5rem 1.75rem;overflow:auto">
+      <img id="archModalImg" src="" alt="Architecture Diagram" style="width:100%;border-radius:10px;display:block"/>
+    </div>
   </div>
 </div>
 
@@ -886,7 +911,23 @@ function closeResume(){
 document.getElementById('resumeModal').addEventListener('click',function(e){
   if(e.target===this) closeResume();
 });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeResume(); });
+
+// Architecture diagram modal
+function openArch(src, title){
+  document.getElementById('archModalTitle').textContent = title;
+  document.getElementById('archModalImg').src = src;
+  document.getElementById('archModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeArch(){
+  document.getElementById('archModal').classList.remove('open');
+  document.getElementById('archModalImg').src = '';
+  document.body.style.overflow = '';
+}
+document.getElementById('archModal').addEventListener('click',function(e){
+  if(e.target===this) closeArch();
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeResume(); closeArch(); } });
 </script>
 </body>
 </html>
