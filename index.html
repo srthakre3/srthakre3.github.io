@@ -206,18 +206,31 @@
     .foot-links a { font-size:.76rem; color:var(--sub); text-decoration:none; transition:color .2s; }
     .foot-links a:hover { color:var(--teal); }
 
-    /* ── TIMELINE ────────────────────────────────── */
+    /* ── JOURNEY (horizontal stepper) ────────────── */
     #journey { background:var(--surface); }
-    .timeline { position:relative; padding-left:1.5rem; max-width:820px; }
-    .timeline::before { content:''; position:absolute; left:0; top:6px; bottom:0; width:2px; background:linear-gradient(to bottom,var(--teal),rgba(37,99,235,.08)); }
-    .tl-item { position:relative; padding:0 0 2.8rem 2rem; }
-    .tl-item:last-child { padding-bottom:0; }
-    .tl-dot { position:absolute; left:-1.5rem; top:4px; width:12px; height:12px; border-radius:50%; background:var(--surface); border:2px solid rgba(37,99,235,.4); transform:translateX(-5px); }
-    .tl-dot.active { background:var(--teal); border-color:var(--teal); box-shadow:0 0 0 4px rgba(37,99,235,.18); }
-    .tl-year { font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:.3rem; }
-    .tl-title { font-size:.97rem; font-weight:700; color:var(--text); margin-bottom:.3rem; }
-    .tl-sub { font-size:.86rem; color:var(--sub); line-height:1.7; }
-    .tl-tag { display:inline-flex; margin-top:.55rem; font-size:.7rem; font-weight:600; color:var(--teal); background:var(--teal-d); border:1px solid rgba(37,99,235,.25); padding:.2rem .6rem; border-radius:5px; }
+    .journey-track { display:flex; align-items:stretch; overflow-x:auto; padding:.5rem 0 1.6rem; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
+    .journey-track::-webkit-scrollbar { height:6px; }
+    .journey-track::-webkit-scrollbar-track { background:rgba(255,255,255,.04); border-radius:99px; }
+    .journey-track::-webkit-scrollbar-thumb { background:rgba(37,99,235,.4); border-radius:99px; }
+    .jt-step { flex:0 0 262px; scroll-snap-align:start; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:1.35rem 1.3rem; display:flex; flex-direction:column; gap:.35rem; transition:border-color .3s,transform .3s,box-shadow .3s; }
+    .jt-step:hover { border-color:rgba(37,99,235,.35); transform:translateY(-4px); box-shadow:0 16px 32px rgba(0,0,0,.35); }
+    .jt-step.active { border-color:rgba(37,99,235,.4); background:linear-gradient(180deg,rgba(37,99,235,.09),var(--card) 55%); }
+    .jt-year { font-size:.66rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); }
+    .jt-title { font-size:.92rem; font-weight:700; color:var(--text); line-height:1.35; }
+    .jt-sub { font-size:.8rem; color:var(--sub); line-height:1.65; }
+    .jt-arrow { flex:0 0 auto; display:flex; align-items:center; justify-content:center; padding:0 .55rem; }
+    .jt-arrow svg { width:30px; height:14px; overflow:visible; }
+    .jt-arrow line { stroke:rgba(37,99,235,.55); stroke-width:1.6; stroke-dasharray:4 3; animation:dashflow 1.2s linear infinite; }
+    .jt-arrow polygon { fill:rgba(37,99,235,.8); }
+    @keyframes dashflow { to { stroke-dashoffset:-7; } }
+    .journey-hint { font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sub); margin-top:.4rem; display:flex; align-items:center; gap:.4rem; }
+
+    /* ── ORG LOGOS ──────────────────────────────── */
+    .org-head { display:flex; align-items:center; gap:.85rem; }
+    .org-logo { height:46px; min-width:46px; max-width:170px; border-radius:11px; background:#fff; display:flex; align-items:center; justify-content:center; padding:8px 10px; flex-shrink:0; box-shadow:0 4px 14px rgba(0,0,0,.35); }
+    .org-logo img { height:100%; width:auto; max-width:100%; object-fit:contain; display:block; }
+    .org-logo span { font-weight:800; color:#10121E; font-size:.56rem; letter-spacing:.02em; }
+    .org-logo-sm { height:38px; min-width:38px; max-width:150px; border-radius:9px; padding:6px 8px; }
 
     /* ── EDUCATION ──────────────────────────────── */
     #education { background:var(--surface); }
@@ -303,7 +316,7 @@
 <div class="stats">
   <div class="stats-grid">
     <div class="stat reveal"><div class="stat-num" data-target="5">0</div><div class="stat-label">Years at Amazon</div></div>
-    <div class="stat reveal d1"><div class="stat-num" data-target="46">0</div><div class="stat-label">Pipelines Migrated</div></div>
+    <div class="stat reveal d1"><div class="stat-num" data-target="4" data-suffix="">0</div><div class="stat-label">Global Regions Supported</div></div>
     <div class="stat reveal d2"><div class="stat-num" data-target="100" data-suffix="+">0</div><div class="stat-label">Sites Served</div></div>
     <div class="stat reveal d3"><div class="stat-num" data-target="30" data-suffix="k+">0</div><div class="stat-label">Monthly Dashboard Views</div></div>
   </div>
@@ -352,58 +365,64 @@
   <div class="container">
     <div class="eyebrow reveal">Journey</div>
     <h2 class="sec-title reveal">The Road So Far</h2>
-    <div class="timeline">
+    <div class="journey-track reveal">
 
-      <div class="tl-item reveal">
-        <div class="tl-dot"></div>
-        <div class="tl-year">2013 - 2018</div>
-        <div class="tl-title">Grew up in India, studied engineering in Pune</div>
-        <div class="tl-sub">Completed a BE in Electronics &amp; Telecommunications at the University of Pune, where I first got into software and realized I liked building things that worked with data.</div>
+      <div class="jt-step">
+        <div class="jt-year">2013 - 2018</div>
+        <div class="jt-title">Grew up in India, studied engineering in Pune</div>
+        <div class="jt-sub">Completed a BE in Electronics &amp; Telecommunications at the University of Pune, where I first got into software and realized I liked building things that worked with data.</div>
       </div>
 
-      <div class="tl-item reveal d1">
-        <div class="tl-dot"></div>
-        <div class="tl-year">Aug 2019</div>
-        <div class="tl-title">Packed up and moved to the US</div>
-        <div class="tl-sub">Landed in Fullerton, California to start my MS at Cal State Fullerton. New country, new city, new chapter.</div>
+      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
+
+      <div class="jt-step">
+        <div class="jt-year">Aug 2019</div>
+        <div class="jt-title">Packed up and moved to the US</div>
+        <div class="jt-sub">Landed in Fullerton, California to start my MS at Cal State Fullerton. New country, new city, new chapter.</div>
       </div>
 
-      <div class="tl-item reveal d2">
-        <div class="tl-dot"></div>
-        <div class="tl-year">2019 - 2021</div>
-        <div class="tl-title">Graduate school + first US work experience</div>
-        <div class="tl-sub">Finished my MS in Computer Engineering while working as a Graduate Assistant. Got my first taste of professional work in the US supporting university research communications and operations.</div>
+      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
+
+      <div class="jt-step">
+        <div class="jt-year">2019 - 2021</div>
+        <div class="jt-title">Graduate school + first US work experience</div>
+        <div class="jt-sub">Finished my MS in Computer Engineering while working as a Graduate Assistant. Got my first taste of professional work in the US supporting university research communications and operations.</div>
       </div>
 
-      <div class="tl-item reveal d1">
-        <div class="tl-dot active"></div>
-        <div class="tl-year">Aug 2021</div>
-        <div class="tl-title">Joined Amazon and moved to Seattle</div>
-        <div class="tl-sub">Got the call from Amazon and made the move to Seattle. Started as a Business Intelligence Engineer in Central Operations, on the fulfillment analytics team, thrown into the deep end from day one, and loved it.</div>
+      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
+
+      <div class="jt-step active">
+        <div class="jt-year">Aug 2021</div>
+        <div class="jt-title">Joined Amazon and moved to Seattle</div>
+        <div class="jt-sub">Got the call from Amazon and made the move to Seattle. Started as a Business Intelligence Engineer in Central Operations, on the fulfillment analytics team, thrown into the deep end from day one, and loved it.</div>
       </div>
 
-      <div class="tl-item reveal d2">
-        <div class="tl-dot active"></div>
-        <div class="tl-year">2021 - 2025</div>
-        <div class="tl-title">Four years building at Amazon scale</div>
-        <div class="tl-sub">Owned end-to-end data systems in Central Operations, from pipelines that run daily FC operations to planning tools used by leadership across NA, EU, Japan, and India. Learned what it means to build for reliability and scale.</div>
+      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
+
+      <div class="jt-step active">
+        <div class="jt-year">2021 - 2025</div>
+        <div class="jt-title">Four years building at Amazon scale</div>
+        <div class="jt-sub">Owned end-to-end data systems in Central Operations, from pipelines that run daily FC operations to planning tools used by leadership across NA, EU, Japan, and India. Learned what it means to build for reliability and scale.</div>
       </div>
 
-      <div class="tl-item reveal d1">
-        <div class="tl-dot active"></div>
-        <div class="tl-year">Jun 2025 - Present</div>
-        <div class="tl-title">New team: Amazon Pharmacy</div>
-        <div class="tl-sub">Moved internally to Amazon Pharmacy, into a new domain with real stakes. I own the pipelines and warehouse tables behind contractual partner metrics, plus reporting that pharmacy leadership and regulators depend on. Wrong numbers here cost money, which changes how you build.</div>
+      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
+
+      <div class="jt-step active">
+        <div class="jt-year">Jun 2025 - Present</div>
+        <div class="jt-title">New team: Amazon Pharmacy</div>
+        <div class="jt-sub">Moved internally to Amazon Pharmacy, into a new domain with real stakes. I own the pipelines and warehouse tables behind contractual partner metrics, plus reporting that pharmacy leadership and regulators depend on. Wrong numbers here cost money, which changes how you build.</div>
       </div>
 
-      <div class="tl-item reveal d2">
-        <div class="tl-dot active"></div>
-        <div class="tl-year">Now</div>
-        <div class="tl-title">Looking for what's next</div>
-        <div class="tl-sub">Five years in, I know what good data infrastructure looks like and what it takes to keep it alive. Now building on the modern stack in my own time: dbt, Airflow, data quality frameworks. Looking for analytics engineering, data engineering or BI engineering roles where I own the pipeline through to the decision. Seattle-based, open to remote or relocation anywhere in the US.</div>
+      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
+
+      <div class="jt-step active">
+        <div class="jt-year">Now</div>
+        <div class="jt-title">Looking for what's next</div>
+        <div class="jt-sub">Five years in, I know what good data infrastructure looks like and what it takes to keep it alive. Now building on the modern stack in my own time: dbt, Airflow, data quality frameworks. Looking for analytics engineering, data engineering or BI engineering roles where I own the pipeline through to the decision. Seattle-based, open to remote or relocation anywhere in the US.</div>
       </div>
 
     </div>
+    <div class="journey-hint reveal">Scroll <span style="color:var(--teal)">→</span></div>
   </div>
 </section>
 
@@ -430,7 +449,10 @@
     <h2 class="sec-title reveal">Where I've Worked</h2>
     <div class="exp-card reveal" style="margin-bottom:1.5rem">
       <div class="exp-top">
-        <div class="exp-company">Amazon</div>
+        <div class="org-head">
+          <div class="org-logo"><img src="logos/amazon.png" alt="Amazon logo" loading="lazy" onerror="logoFallback(this,'AMZN')"></div>
+          <div class="exp-company">Amazon</div>
+        </div>
         <div class="exp-dates">Aug 2021 - Present · Seattle, WA</div>
       </div>
 
@@ -461,7 +483,10 @@
 
     <div class="exp-card reveal d1">
       <div class="exp-top">
-        <div class="exp-company">Cal State Fullerton</div>
+        <div class="org-head">
+          <div class="org-logo"><img src="logos/csuf.png" alt="Cal State Fullerton logo" loading="lazy" onerror="logoFallback(this,'CSUF')"></div>
+          <div class="exp-company">Cal State Fullerton</div>
+        </div>
         <div class="exp-dates">Sep 2019 - May 2021 · Fullerton, CA</div>
       </div>
       <div class="exp-role">Graduate Assistant · Office of Research &amp; Sponsored Projects</div>
@@ -482,7 +507,10 @@
     <div class="edu-grid">
 
       <div class="edu-card reveal">
-        <div class="edu-school">Cal State Fullerton</div>
+        <div class="org-head" style="margin-bottom:.6rem">
+          <div class="org-logo org-logo-sm"><img src="logos/csuf.png" alt="Cal State Fullerton logo" loading="lazy" onerror="logoFallback(this,'CSUF')"></div>
+          <div class="edu-school" style="margin-bottom:0">Cal State Fullerton</div>
+        </div>
         <div class="edu-degree">MS · Computer Engineering</div>
         <div class="edu-meta">2019 - 2021 · Fullerton, California</div>
         <div class="edu-pills">
@@ -494,7 +522,10 @@
       </div>
 
       <div class="edu-card reveal d1">
-        <div class="edu-school">University of Pune</div>
+        <div class="org-head" style="margin-bottom:.6rem">
+          <div class="org-logo org-logo-sm"><img src="logos/pune.png" alt="University of Pune logo" loading="lazy" onerror="logoFallback(this,'SPPU')"></div>
+          <div class="edu-school" style="margin-bottom:0">University of Pune</div>
+        </div>
         <div class="edu-degree">BE · Electronics &amp; Telecommunications</div>
         <div class="edu-meta">2013 - 2018 · Pune, India</div>
         <div class="edu-pills">
@@ -654,6 +685,15 @@
 </footer>
 
 <script>
+// Org logo fallback: if a logo image is missing, show the org initials in the chip
+function logoFallback(img, txt){
+  const chip = img.parentElement;
+  chip.innerHTML = '';
+  const s = document.createElement('span');
+  s.textContent = txt;
+  chip.appendChild(s);
+}
+
 // Typewriter
 const roles=['Analytics Engineer','Data Engineer','BI Engineer','Pipeline Builder'];
 let ri=0,ci=0,del=false;
@@ -679,7 +719,7 @@ document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 const co=new IntersectionObserver(es=>{
   es.forEach(e=>{
     if(!e.isIntersecting)return;
-    const el=e.target,t=+el.dataset.target,suf=el.dataset.suffix||'+',fmt=el.dataset.format;
+    const el=e.target,t=+el.dataset.target,suf=el.dataset.suffix??'+',fmt=el.dataset.format;
     const dur=1400,start=performance.now();
     const tick=now=>{
       const p=Math.min((now-start)/dur,1),ease=1-Math.pow(1-p,3),v=Math.floor(ease*t);
