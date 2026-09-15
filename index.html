@@ -103,17 +103,17 @@
     @keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0);opacity:.5}50%{transform:rotate(45deg) translateY(5px);opacity:1}}
 
     /* ── STATS ──────────────────────────────────── */
-    .stats { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:4rem 2rem; }
+    .stats { background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:2.75rem 2rem; }
     .stats-grid { max-width:1120px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
     .stat { text-align:center; padding:1.75rem; }
     .stat-num { font-size:2.8rem; font-weight:800; letter-spacing:-.04em; background:linear-gradient(135deg,var(--teal),var(--blue)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; margin-bottom:.35rem; }
     .stat-label { font-size:.78rem; color:var(--sub); }
 
     /* ── SHARED ─────────────────────────────────── */
-    section { padding:9rem 2rem; }
+    section { padding:4.5rem 2rem; }
     .container { max-width:1200px; margin:0 auto; }
     .eyebrow { font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:.5rem; }
-    .sec-title { font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-.03em; color:var(--text); margin-bottom:2.8rem; line-height:1.15; }
+    .sec-title { font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-.03em; color:var(--text); margin-bottom:2rem; line-height:1.15; }
 
     /* ── ABOUT ──────────────────────────────────── */
     #about { background:var(--bg); }
@@ -206,24 +206,17 @@
     .foot-links a { font-size:.76rem; color:var(--sub); text-decoration:none; transition:color .2s; }
     .foot-links a:hover { color:var(--teal); }
 
-    /* ── JOURNEY (horizontal stepper) ────────────── */
+    /* ── JOURNEY (block grid) ────────────────────── */
     #journey { background:var(--surface); }
-    .journey-track { display:flex; align-items:stretch; overflow-x:auto; padding:.5rem 0 1.6rem; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
-    .journey-track::-webkit-scrollbar { height:6px; }
-    .journey-track::-webkit-scrollbar-track { background:rgba(255,255,255,.04); border-radius:99px; }
-    .journey-track::-webkit-scrollbar-thumb { background:rgba(37,99,235,.4); border-radius:99px; }
-    .jt-step { flex:0 0 262px; scroll-snap-align:start; background:var(--card); border:1px solid var(--border); border-radius:18px; padding:1.35rem 1.3rem; display:flex; flex-direction:column; gap:.35rem; transition:border-color .3s,transform .3s,box-shadow .3s; }
+    .journey-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:.9rem; }
+    .jt-step { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:1.25rem 1.2rem; display:flex; flex-direction:column; gap:.35rem; transition:border-color .3s,transform .3s,box-shadow .3s; }
     .jt-step:hover { border-color:rgba(37,99,235,.35); transform:translateY(-4px); box-shadow:0 16px 32px rgba(0,0,0,.35); }
     .jt-step.active { border-color:rgba(37,99,235,.4); background:linear-gradient(180deg,rgba(37,99,235,.09),var(--card) 55%); }
-    .jt-year { font-size:.66rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); }
-    .jt-title { font-size:.92rem; font-weight:700; color:var(--text); line-height:1.35; }
-    .jt-sub { font-size:.8rem; color:var(--sub); line-height:1.65; }
-    .jt-arrow { flex:0 0 auto; display:flex; align-items:center; justify-content:center; padding:0 .55rem; }
-    .jt-arrow svg { width:30px; height:14px; overflow:visible; }
-    .jt-arrow line { stroke:rgba(37,99,235,.55); stroke-width:1.6; stroke-dasharray:4 3; animation:dashflow 1.2s linear infinite; }
-    .jt-arrow polygon { fill:rgba(37,99,235,.8); }
-    @keyframes dashflow { to { stroke-dashoffset:-7; } }
-    .journey-hint { font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--sub); margin-top:.4rem; display:flex; align-items:center; gap:.4rem; }
+    .jt-head { display:flex; align-items:center; justify-content:space-between; gap:.5rem; }
+    .jt-year { font-size:.64rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); }
+    .jt-num { font-size:.62rem; font-weight:800; color:rgba(240,240,245,.35); letter-spacing:.06em; }
+    .jt-title { font-size:.9rem; font-weight:700; color:var(--text); line-height:1.35; }
+    .jt-sub { font-size:.78rem; color:var(--sub); line-height:1.6; }
 
     /* ── ORG LOGOS ──────────────────────────────── */
     .org-head { display:flex; align-items:center; gap:.85rem; }
@@ -251,11 +244,13 @@
       .about-grid { grid-template-columns:1fr; }
       .about-right { grid-template-columns:1fr; }
       .photo-wrap { flex-direction:row; align-items:center; gap:1.5rem; }
+      .journey-grid { grid-template-columns:repeat(2,1fr); }
     }
     @media(max-width:640px) {
+      .journey-grid { grid-template-columns:1fr; }
       .nav-links { display:none; }
       .stats-grid { grid-template-columns:repeat(2,1fr); }
-      section { padding:4rem 1.25rem; }
+      section { padding:3rem 1.25rem; }
     }
   </style>
 </head>
@@ -365,64 +360,57 @@
   <div class="container">
     <div class="eyebrow reveal">Journey</div>
     <h2 class="sec-title reveal">The Road So Far</h2>
-    <div class="journey-track reveal">
+    <div class="journey-grid reveal">
 
       <div class="jt-step">
-        <div class="jt-year">2013 - 2018</div>
+        <div class="jt-head"><div class="jt-year">2013 - 2018</div><div class="jt-num">01</div></div>
         <div class="jt-title">Grew up in India, studied engineering in Pune</div>
         <div class="jt-sub">Completed a BE in Electronics &amp; Telecommunications at the University of Pune, where I first got into software and realized I liked building things that worked with data.</div>
       </div>
 
-      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
 
       <div class="jt-step">
-        <div class="jt-year">Aug 2019</div>
+        <div class="jt-head"><div class="jt-year">Aug 2019</div><div class="jt-num">02</div></div>
         <div class="jt-title">Packed up and moved to the US</div>
         <div class="jt-sub">Landed in Fullerton, California to start my MS at Cal State Fullerton. New country, new city, new chapter.</div>
       </div>
 
-      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
 
       <div class="jt-step">
-        <div class="jt-year">2019 - 2021</div>
+        <div class="jt-head"><div class="jt-year">2019 - 2021</div><div class="jt-num">03</div></div>
         <div class="jt-title">Graduate school + first US work experience</div>
         <div class="jt-sub">Finished my MS in Computer Engineering while working as a Graduate Assistant. Got my first taste of professional work in the US supporting university research communications and operations.</div>
       </div>
 
-      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
 
       <div class="jt-step active">
-        <div class="jt-year">Aug 2021</div>
+        <div class="jt-head"><div class="jt-year">Aug 2021</div><div class="jt-num">04</div></div>
         <div class="jt-title">Joined Amazon and moved to Seattle</div>
         <div class="jt-sub">Got the call from Amazon and made the move to Seattle. Started as a Business Intelligence Engineer in Central Operations, on the fulfillment analytics team, thrown into the deep end from day one, and loved it.</div>
       </div>
 
-      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
 
       <div class="jt-step active">
-        <div class="jt-year">2021 - 2025</div>
+        <div class="jt-head"><div class="jt-year">2021 - 2025</div><div class="jt-num">05</div></div>
         <div class="jt-title">Four years building at Amazon scale</div>
         <div class="jt-sub">Owned end-to-end data systems in Central Operations, from pipelines that run daily FC operations to planning tools used by leadership across NA, EU, Japan, and India. Learned what it means to build for reliability and scale.</div>
       </div>
 
-      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
 
       <div class="jt-step active">
-        <div class="jt-year">Jun 2025 - Present</div>
+        <div class="jt-head"><div class="jt-year">Jun 2025 - Present</div><div class="jt-num">06</div></div>
         <div class="jt-title">New team: Amazon Pharmacy</div>
         <div class="jt-sub">Moved internally to Amazon Pharmacy, into a new domain with real stakes. I own the pipelines and warehouse tables behind contractual partner metrics, plus reporting that pharmacy leadership and regulators depend on. Wrong numbers here cost money, which changes how you build.</div>
       </div>
 
-      <div class="jt-arrow" aria-hidden="true"><svg viewBox="0 0 30 14"><line x1="0" y1="7" x2="21" y2="7"/><polygon points="21,2.5 29,7 21,11.5"/></svg></div>
 
       <div class="jt-step active">
-        <div class="jt-year">Now</div>
+        <div class="jt-head"><div class="jt-year">Now</div><div class="jt-num">07</div></div>
         <div class="jt-title">Looking for what's next</div>
         <div class="jt-sub">Five years in, I know what good data infrastructure looks like and what it takes to keep it alive. Now building on the modern stack in my own time: dbt, Airflow, data quality frameworks. Looking for analytics engineering, data engineering or BI engineering roles where I own the pipeline through to the decision. Seattle-based, open to remote or relocation anywhere in the US.</div>
       </div>
 
     </div>
-    <div class="journey-hint reveal">Scroll <span style="color:var(--teal)">→</span></div>
   </div>
 </section>
 
